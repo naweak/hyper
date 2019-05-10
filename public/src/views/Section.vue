@@ -33,10 +33,14 @@
             address: that.$route.params.address
           },
           success (data) {
-            if (data.success)
+            if (data.success) {
               that.section = data.success
-            else
+              that.$title(that.section.name)
+            }
+            else {
               that.notFound = data.error.data
+              that.$title(that.notFound)
+            }
           }
         })
       },

@@ -26,10 +26,14 @@
             method: 'sectionList'
           },
           success (data) {
-            if (data.success)
+            if (data.success) {
               that.sections = data.success
-            else
+              that.$title('Разделы')
+            }
+            else {
               vm.$emit('error', data.error.data)
+              that.$title(data.error.data)
+            }
           }
         })
       }
