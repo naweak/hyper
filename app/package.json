@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@naweak/n": "0.0.4",
+    "connect-history-api-fallback": "^1.6.0",
     "md5": "^2.2.1",
     "sync-mysql": "^3.0.1"
   },

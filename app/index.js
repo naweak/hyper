@@ -1,5 +1,7 @@
 // Modules
 const Framework = require('@naweak/n')
+const { static } = require('express')
+const history = require('connect-history-api-fallback')
 
 // Config
 const config = require('./config.js')
@@ -10,7 +12,6 @@ const parasha = new Framework({
   host: config.host,
   port: config.port
 })
-parasha.app.use('/', (req, res) => {
-  res.send('Main')
-})
+parasha.app.use(history())
+parasha.app.use(static('../public/dist/'))
 parasha.runServer()
