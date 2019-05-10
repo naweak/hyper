@@ -40,7 +40,9 @@
     },
     computed: {
       menu () {
-        let menu = []
+        let menu = [
+          { link: { name: 'sectionList' }, text: 'Разделы' }
+        ]
         if (!this.$root.userInfo) {
           menu = menu.concat([
             { link: { name: 'register' }, text: 'Рега' },
@@ -49,7 +51,8 @@
         }
         else {
           menu = menu.concat([
-            { link: { name: 'logout' }, text: 'Выход' },
+            { link: { name: 'createSection' }, text: 'Создать раздел' },
+            { link: { name: 'logout' }, text: 'Выход' }
           ])
         }
         return menu

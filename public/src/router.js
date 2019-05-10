@@ -4,6 +4,9 @@ import Home from './views/Home'
 import Register from './views/Register'
 import Login from './views/Login'
 import Logout from './views/Logout'
+import CreateSection from './views/CreateSection'
+import Section from './views/Section'
+import SectionList from './views/SectionList'
 
 Vue.use(Router)
 
@@ -30,6 +33,21 @@ export default new Router({
       path: '/logout',
       name: 'logout',
       component: Logout
+    },
+    {
+      path: '/createSection',
+      name: 'createSection',
+      component: CreateSection
+    },
+    {
+      path: '/section/:address',
+      name: 'section',
+      component: Section
+    },
+    {
+      path: '/sectionList',
+      name: 'sectionList',
+      component: SectionList
     }
   ]
 })
