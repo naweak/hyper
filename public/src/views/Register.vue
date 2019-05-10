@@ -1,5 +1,5 @@
 <template>
-  <div id="register">
+  <div id="register" v-if="!$root.userInfo">
     <h2>Рега</h2>
     <form v-on:submit.prevent="register()">
       <div class="form-group">
@@ -31,10 +31,12 @@
       </div>
     </form>
   </div>
+  <Error v-else />
 </template>
 
 <script>
   import $ from 'jquery'
+  import Error from '../components/Error'
   export default {
     name: 'register',
     data () {
@@ -44,6 +46,7 @@
         passwordVerify: ''
       }
     },
+    components: { Error },
     methods: {
       register () {
         var that = this

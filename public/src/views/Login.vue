@@ -1,5 +1,5 @@
 <template>
-  <div id="login">
+  <div id="login" v-if="!$root.userInfo">
     <h2>Логин</h2>
     <form v-on:submit.prevent="doLogin()">
       <div class="form-group">
@@ -23,10 +23,12 @@
       </div>
     </form>
   </div>
+  <Error v-else />
 </template>
 
 <script>
   import $ from 'jquery'
+  import Error from '../components/Error'
   export default {
     name: 'login',
     data () {
@@ -35,6 +37,7 @@
         password: ""
       }
     },
+    components: { Error },
     methods: {
       doLogin () {
         var that = this
