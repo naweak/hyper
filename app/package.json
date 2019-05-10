@@ -1,0 +1,19 @@
+{
+  "name": "hyperparasha-backend",
+  "version": "1.0.0",
+  "description": "Hyperparasha: backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "@naweak/n": "0.0.4",
+    "md5": "^2.2.1",
+    "sync-mysql": "^3.0.1"
+  },
+  "author": "naweak",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
