@@ -1,5 +1,5 @@
 <template>
-  <div class="post media" :id="'post-' + post.id">
+  <div class="post" :id="'post-' + post.id">
     <div class="media-body">
       <h2 v-if="showSection"><router-link :to="{ name: 'section', params: { address: section.address } }">{{ section.name }}</router-link></h2>
       <div class="text" v-html="parser(post.text)"></div>
@@ -121,11 +121,15 @@
     padding-left: 2px !important;
     padding-right: 2px !important;
   }
-  .text > p > img {
+  /*.text > p > img {
     max-width: 700px !important;
-  }
+  }*/
   .autograph {
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+  .text {
+    max-width: 100%;
+    overflow: auto;
   }
 </style>
