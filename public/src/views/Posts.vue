@@ -61,6 +61,7 @@
           success (data) {
             if (data.success) {
               that.pages = data.success
+              that.$title('Все посты')
             }
             else {
               vm.$emit('error', data.error.data)

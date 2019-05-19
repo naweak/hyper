@@ -32,6 +32,7 @@
           success (data) {
             if (data.success) {
               that.post = data.success
+              that.$title('Пост #' + data.success.id)
               if (postId) {
                 that.$nextTick(() => {
                   location.hash = 'post-' + postId
@@ -48,6 +49,7 @@
                 code,
                 description: data.error.data
               }
+              that.$title(data.error.data)
             }
           }
         })
