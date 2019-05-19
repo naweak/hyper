@@ -18,8 +18,13 @@ function random (length = 32) {
   return result
 }
 
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 module.exports = {
   arrayLast,
   choice,
-  random
+  random,
+  isNumeric
 }

@@ -1,67 +1,87 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-DROP TABLE IF EXISTS `sections`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `author` varchar(250) NOT NULL,
+  `text` text NOT NULL,
+  `section` varchar(250) NOT NULL,
+  `type` enum('post','comment') NOT NULL DEFAULT 'post',
+  `parent` int(11) NOT NULL DEFAULT 0,
+  `createDate` int(20) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT 0,
+  `bumped` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `sections` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `address` varchar(250) NOT NULL,
   `name` varchar(250) NOT NULL,
   `description` text NOT NULL,
   `admin` varchar(250) NOT NULL,
-  `createDate` int(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `address_2` (`address`),
-  UNIQUE KEY `address_3` (`address`),
-  KEY `address` (`address`),
-  KEY `admin` (`admin`)
-) ENGINE=InnoDB AUTO_INCREMENT DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `createDate` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `tokens`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tokens` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `code` varchar(250) NOT NULL,
   `login` varchar(250) NOT NULL,
   `expires` int(11) NOT NULL,
-  `createDate` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `createDate` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `login` varchar(250) NOT NULL,
   `password` varchar(250) NOT NULL,
   `joinDate` int(20) NOT NULL,
   `ip` varchar(250) NOT NULL,
-  `ugroup` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `login` (`login`),
-  KEY `ip` (`ip`),
-  KEY `ugroup` (`ugroup`)
-) ENGINE=InnoDB AUTO_INCREMENT DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `ugroup` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `author` (`author`),
+  ADD KEY `section` (`section`);
+
+ALTER TABLE `sections`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `address_2` (`address`),
+  ADD UNIQUE KEY `address_3` (`address`),
+  ADD KEY `address` (`address`),
+  ADD KEY `admin` (`admin`);
+
+ALTER TABLE `tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `login` (`login`);
+
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `login` (`login`),
+  ADD KEY `ip` (`ip`),
+  ADD KEY `ugroup` (`ugroup`);
+
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `sections`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

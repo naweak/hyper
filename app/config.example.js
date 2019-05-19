@@ -4,5 +4,9 @@ module.exports = {
   mysqlHost: '127.0.0.1',
   mysqlUser: 'hp',
   mysqlPassword: '123',
-  mysqlName: 'hp'
+  mysqlName: 'hp',
+  delay: {
+    post: 5000
+  },
+  postsOnPage: 45
 }

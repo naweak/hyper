@@ -2,21 +2,21 @@
   <div id="app">
     <Status />
     <header>
-      <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <router-link to="/" class="navbar-brand">Гиперпараша</router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item"  v-for="item in menu">
+            <li class="nav-item" v-for="item in menu">
               <router-link class="nav-link" :to="item.link" v-html="item.text"></router-link>
             </li>
           </ul>
         </div>
       </nav>
     </header>
-    <div class="container-fluid" role="main">
+    <div class="container mt-2" role="main">
       <div class="row">
         <div class="col-md-12" id="content">
           <router-view />
