@@ -121,9 +121,9 @@
     padding-left: 2px !important;
     padding-right: 2px !important;
   }
-  /*.text > p > img {
+  .text > p > img {
     max-width: 700px !important;
-  }*/
+  }
   .autograph {
     margin-top: 15px;
     margin-bottom: 15px;
