@@ -112,7 +112,7 @@
             section: vm.$route.params.address
           },
           success (data) {
-            if (data.success)
+            if (data.success || data.success == 0)
               that.pages = data.success
             else
               vm.$emit('error', data.error.data)

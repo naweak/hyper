@@ -59,7 +59,7 @@
             method: 'postsPages'
           },
           success (data) {
-            if (data.success) {
+            if (data.success || data.success == 0) {
               that.pages = data.success
               that.$title('Все посты')
             }
