@@ -52,10 +52,9 @@
         var that = this
         var vm = that.$root
         $.ajax({
-          url: vm.config.api,
+          url: vm.config.api + '/section/create',
           type: 'post',
           data: {
-            method: 'createSection',
             address: that.address,
             name: that.name,
             description: that.description,
@@ -72,6 +71,9 @@
           }
         })
       }
+    },
+    created () {
+      this.$title('Создать раздел')
     }
   }
 </script>

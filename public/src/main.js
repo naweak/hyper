@@ -35,9 +35,8 @@ new Vue({
     updateUserInfo () {
       var vm = this
       $.ajax({
-        url: vm.config.api,
+        url: vm.config.api + '/user',
         data: {
-          method: 'userInfo',
           token: vm.$cookies.get('token')
         },
         success (data) {

@@ -52,10 +52,9 @@
         var that = this
         var vm = that.$root
         $.ajax({
-          url: vm.config.api,
+          url: vm.config.api + '/user/register',
           type: 'post',
           data: {
-            method: 'register',
             login: that.login,
             password: that.password,
             passwordVerify: that.passwordVerify

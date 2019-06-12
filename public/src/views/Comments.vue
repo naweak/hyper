@@ -22,10 +22,9 @@
         let that = this
         let vm = that.$root
         $.ajax({
-          url: vm.config.api,
+          url: vm.config.api + '/post',
           async: false,
           data: {
-            method: 'postInfo',
             id: that.$route.params.id,
             showChilds: true
           },

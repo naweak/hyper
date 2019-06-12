@@ -43,10 +43,9 @@
         var that = this
         var vm = that.$root
         $.ajax({
-          url: vm.config.api,
-          type: 'post',
+          url: vm.config.api + '/user/getToken',
+          type: 'get',
           data: {
-            method: 'getToken',
             login: that.login,
             password: that.password
           },

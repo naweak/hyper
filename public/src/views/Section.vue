@@ -19,7 +19,7 @@
       </form>
     </div>
     <div id="posts" class="mb-3">
-      <Post v-for="post in posts" :post="post" />
+      <Post v-for="post in section.posts" :post="post" />
     </div>
     <ul class="pagination">
       <li class="page-item" v-if="$route.params.page">
@@ -27,7 +27,7 @@
           <span>Назад</span>
         </router-link>
       </li>
-      <li class="page-item" v-if="$route.params.page != pages">
+      <li class="page-item" v-if="$route.params.page != section.totalPagesCount">
         <router-link :to="{ params: { page: (Number($route.params.page)||0)+1 } }" class="page-link">
           <span>Вперед</span>
         </router-link>
@@ -47,8 +47,6 @@
       return {
         section: {},
         notFound: false,
-        posts: [],
-        pages: 0,
         text: '',
         noko: true
       }
@@ -59,9 +57,8 @@
         var that = this
         var vm = that.$root
         $.ajax({
-          url: vm.config.api,
+          url: vm.config.api + '/section',
           data: {
-            method: 'sectionInfo',
             address: that.$route.params.address
           },
           success (data) {
@@ -78,55 +75,14 @@
       },
       loadPage () {
         this.getSection()
-        this.loadPosts()
-        this.getTotalPages()
-      },
-      loadPosts() {
-        let that = this
-        let vm = that.$root
-        $.ajax({
-          url: vm.config.api,
-          data: {
-            method: 'sectionPosts',
-            section: vm.$route.params.address,
-            page: vm.$route.params.page
-          },
-          success (data) {
-            if (data.success) {
-              that.posts = data.success.posts
-              that.postsCount = data.success.totalCount
-            }
-            else {
-              vm.$emit('error', data.error.data)
-            }
-          }
-        })
-      },
-      getTotalPages() {
-        let that = this
-        let vm = that.$root
-        $.ajax({
-          url: vm.config.api,
-          data: {
-            method: 'sectionPostsPages',
-            section: vm.$route.params.address
-          },
-          success (data) {
-            if (data.success || data.success == 0)
-              that.pages = data.success
-            else
-              vm.$emit('error', data.error.data)
-          }
-        })
       },
       createPost() {
         let that = this
         let vm = that.$root
         $.ajax({
-          url: vm.config.api,
+          url: vm.config.api + '/post/create',
           type: 'post',
           data: {
-            method: 'createPost',
             token: that.$cookies.get('token'),
             text: that.text,
             section: that.$route.params.address
@@ -138,8 +94,7 @@
               }
               else {
                 that.text = ''
-                that.loadPosts()
-                that.getTotalPages()
+                that.getSection()
               }
             }
             else {

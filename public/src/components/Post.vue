@@ -46,9 +46,8 @@
         let that = this
         let vm = that.$root
         $.ajax({
-          url: vm.config.api,
+          url: vm.config.api + '/section',
           data: {
-            method: 'sectionInfo',
             address: that.post.section
           },
           success (data) {
@@ -68,10 +67,9 @@
         let that = this
         let vm = that.$root
         $.ajax({
-          url: vm.config.api,
+          url: vm.config.api + '/post/create',
           type: 'post',
           data: {
-            method: 'createPost',
             text: that.replyText,
             parent: that.post.id,
             section: that.post.section,

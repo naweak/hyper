@@ -1,17 +1,37 @@
-// Modules
-const Framework = require('@naweak/n')
-const { static } = require('express')
+const express = require('express')
+const bodyParser = require('body-parser')
+const apiRouter = require('./routes/api')
 const history = require('connect-history-api-fallback')
+const { static } = require('express')
+const config = require('./config')
 
-// Config
-const config = require('./config.js')
+const app = express()
+const port = 3000 || process.env.PORT
 
-// Init app
-const parasha = new Framework({
-  methodsDir: __dirname + '/src/methods/',
-  host: config.host,
-  port: config.port
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+var requestsInSession = 0
+
+app.use((req, res, next) => {
+  res.set('Access-Control-Allow-Origin', '*')
+  res.success = (success) => {
+    res.send({ success })
+  }
+  res.error = (data, code) => {
+    res.send({ error: { data, code } })
+  }
+  res.notLogged = () => {
+    res.error('Не залогинен',  12)
+  }
+  req.ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  requestsInSession++
+  console.log('Total requests', requestsInSession)
+  next()
 })
-parasha.app.use(history())
-parasha.app.use(static('../public/dist/'))
-parasha.runServer()
+
+app.use('/api/', apiRouter)
+app.use(history())
+app.use(static('../public/dist'))
+
+app.listen(config.port, config.host, () => console.log(`Listening on ${config.host}:${config.port}`))

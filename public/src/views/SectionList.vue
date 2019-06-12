@@ -21,10 +21,7 @@
         var that = this
         var vm = that.$root
         $.ajax({
-          url: vm.config.api,
-          data: {
-            method: 'sectionList'
-          },
+          url: vm.config.api + '/section/list',
           success (data) {
             if (data.success) {
               that.sections = data.success

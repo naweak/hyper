@@ -37,30 +37,13 @@
         $.ajax({
           url: vm.config.api,
           data: {
-            method: 'posts',
             page: that.$route.params.page
           },
           success (data) {
             if (data.success) {
               that.posts = data.success.posts
-            }
-            else {
-              vm.$emit('error', data.error.data)
-            }
-          }
-        })
-      },
-      getTotalPages () {
-        let that = this
-        let vm = that.$root
-        $.ajax({
-          url: vm.config.api,
-          data: {
-            method: 'postsPages'
-          },
-          success (data) {
-            if (data.success || data.success == 0) {
-              that.pages = data.success
+              window.tmp = data.success
+              that.pages = data.success.totalPages
               that.$title('Все посты')
             }
             else {
@@ -71,7 +54,6 @@
       },
       loadPage () {
         this.getPosts()
-        this.getTotalPages()
       }
     },
     created () {
