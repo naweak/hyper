@@ -1,6 +1,5 @@
 const Router = require('express').Router
 var router = Router()
-const IndexController = require('../controller/IndexController')
 const UserController = require('../controller/UserController')
 const SectionController = require('../controller/SectionController')
 const PostController = require('../controller/PostController')
