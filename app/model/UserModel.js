@@ -94,6 +94,17 @@ class UserModel extends BaseModel {
     }
     return await this.info(token.login)
   }
+  static async groups (login) {
+    let info = await this.info(login)
+    return info.ugroup.split(',')
+  }
+  static async inGroup (login, group) {
+    let groups = await this.groups(login)
+    return groups.indexOf(group) > -1
+  }
+  static async isAdmin (login) {
+    return await this.inGroup(login, 'admins')
+  }
 }
 
 module.exports = UserModel

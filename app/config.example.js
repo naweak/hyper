@@ -8,5 +8,11 @@ module.exports = {
   delay: {
     post: 5000
   },
-  postsOnPage: 45
+  postsOnPage: 45,
+  pvd: {
+    chat: {
+      delay: 1500,
+      messagesOnPage: 200
+    }
+  }
 }

@@ -14,6 +14,11 @@ import Markdown from 'markdown-it'
 Vue.prototype.parser = (text) => {
   let md = new Markdown()
   text = md.render(text)
+  for (let index in config.emoji) {
+    let elem = config.emoji[index]
+    console.log(index)
+    text = text.replace(new RegExp(`:${index}:`, 'g'), `<img alt=":${index}:" title=":${index}:" src="${elem}" class="emoji" />`)
+  }
   return text
 }
 

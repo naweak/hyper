@@ -41,7 +41,8 @@
     computed: {
       menu () {
         let menu = [
-          { link: { name: 'sectionList' }, text: 'Разделы' }
+          { link: { name: 'sectionList' }, text: 'Разделы' },
+          { link: { name: 'pvd' }, text: 'Песков взрывает дома' }
         ]
         if (!this.$root.userInfo) {
           menu = menu.concat([
@@ -67,5 +68,12 @@
 <style>
   .container-fluid {
     padding: 60px 15px 0;
+  }
+  .clickable {
+    cursor: pointer;
+  }
+  .emoji, .text > p > .emoji {
+    max-width: 32px !important;
+    margin: 3px;
   }
 </style>

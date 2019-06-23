@@ -6,7 +6,6 @@ const { static } = require('express')
 const config = require('./config')
 
 const app = express()
-const port = 3000 || process.env.PORT
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())

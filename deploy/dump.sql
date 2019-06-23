@@ -15,11 +15,26 @@ CREATE TABLE `posts` (
   `text` text NOT NULL,
   `section` varchar(250) NOT NULL,
   `type` enum('post','comment') NOT NULL DEFAULT 'post',
-  `parent` int(11) NOT NULL DEFAULT 0,
+  `parent` int(11) NOT NULL DEFAULT '0',
   `createDate` int(20) NOT NULL,
-  `deleted` tinyint(1) NOT NULL DEFAULT 0,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
   `bumped` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `pvd_chat` (
+  `id` int(11) NOT NULL,
+  `text` text CHARACTER SET utf8mb4 NOT NULL,
+  `author` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
+  `createDate` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `pvd_targets` (
+  `id` int(11) NOT NULL,
+  `link` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
+  `author` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
+  `createDate` int(11) NOT NULL,
+  `enabled` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `sections` (
   `id` int(11) NOT NULL,
@@ -52,6 +67,14 @@ ALTER TABLE `posts`
   ADD KEY `author` (`author`),
   ADD KEY `section` (`section`);
 
+ALTER TABLE `pvd_chat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `author` (`author`);
+
+ALTER TABLE `pvd_targets`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `author` (`author`);
+
 ALTER TABLE `sections`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `address_2` (`address`),
@@ -70,6 +93,12 @@ ALTER TABLE `users`
   ADD KEY `ugroup` (`ugroup`);
 
 ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `pvd_chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `pvd_targets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `sections`

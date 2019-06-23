@@ -9,6 +9,7 @@ import Section from './views/Section'
 import SectionList from './views/SectionList'
 import Comments from './views/Comments'
 import Posts from './views/Posts'
+import Pvd from './views/Pvd'
 
 Vue.use(Router)
 
@@ -60,6 +61,12 @@ export default new Router({
       path: '/posts/:page?',
       name: 'posts',
       component: Posts
+    },
+    {
+      path: '/pvd/:page?',
+      name: 'pvd',
+      component: Pvd,
+      props: true
     }
   ]
 })
