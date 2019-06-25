@@ -1,0 +1,27 @@
+{
+  "name": "thirdwave-api-docs",
+  "version": "1.0.0",
+  "description": "Thirdwave API docs",
+  "main": "index.js",
+  "scripts": {
+    "buildtpl": "node buildtpl.js",
+    "build": "webpack --config build/webpack.config.js"
+  },
+  "author": "naweak",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "ejs": "^2.6.2",
+    "path": "^0.12.7",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "bootstrap-navbar-sidebar": "^4.0.2",
+    "popper.js": "^1.15.0"
+  }
+}

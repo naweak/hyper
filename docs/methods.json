@@ -1,0 +1,350 @@
+{
+  "methods": [
+    {
+      "dir": "/api/user",
+      "type": "get",
+      "description": "Инфа о юзере",
+      "params": [
+        {
+          "name": "token",
+          "necessary": true,
+          "description": "Токен юзера"
+        }
+      ]
+    },
+    {
+      "dir": "/api/user/register",
+      "type": "post",
+      "description": "Регистрация пользователя",
+      "params": [
+        {
+          "name": "login",
+          "description": "Логин",
+          "necessary": true
+        },
+        {
+          "name": "password",
+          "description": "Пароль",
+          "necessary": true
+        },
+        {
+          "name": "passwordVerify",
+          "description": "Подтверждение пароля",
+          "necessary": true
+        }
+      ],
+      "errors": [
+        {
+          "code": 21,
+          "description": "Не введен логин"
+        },
+        {
+          "code": 22,
+          "description": "Не введен пароль"
+        },
+        {
+          "code": 23,
+          "description": "Неправильное подтверждение пароля"
+        },
+        {
+          "code": 24,
+          "description": "Пользователь с введенным логином уже существует"
+        }
+      ]
+    },
+    {
+      "dir": "/api/user/getToken",
+      "type": "get",
+      "description": "Получение ключа авторизации пользователя",
+      "params": [
+        {
+          "name": "login",
+          "description": "Логин пользователя",
+          "necessary": true
+        },
+        {
+          "name": "password",
+          "description": "Пароль пользователя",
+          "necessary": true
+        }
+      ],
+      "errors": [
+        {
+          "code": 31,
+          "description": "Не введен логин"
+        },
+        {
+          "code": 32,
+          "description": "Не введен пароль"
+        },
+        {
+          "code": 33,
+          "description": "Неправильные логин или пароль"
+        }
+      ]
+    },
+    {
+      "dir": "/api/section",
+      "type": "get",
+      "description": "Информация о разделе",
+      "params": [
+        {
+          "name": "address",
+          "description": "Адрес раздела",
+          "necessary": true
+        },
+        {
+          "name": "page",
+          "description": "Страница списка постов",
+          "necessary": false
+        }
+      ],
+      "errors": [
+        {
+          "code": 51,
+          "description": "Не введен адрес"
+        },
+        {
+          "code": 52,
+          "description": "Раздел не существует"
+        }
+      ]
+    },
+    {
+      "dir": "/api/section/create",
+      "type": "post",
+      "description": "Создание раздела",
+      "params": [
+        {
+          "name": "token",
+          "description": "Ключ авторизации пользователя",
+          "necessary": true
+        },
+        {
+          "name": "address",
+          "description": "Адрес раздела",
+          "necessary": true
+        },
+        {
+          "name": "name",
+          "description": "Имя раздела",
+          "necessary": true
+        },
+        {
+          "name": "description",
+          "description": "Описание раздела",
+          "necessary": true
+        }
+      ],
+      "errors": [
+        {
+          "code": 41,
+          "description": "Не введен адрес раздела"
+        },
+        {
+          "code": 42,
+          "description": "Не введено имя раздела"
+        },
+        {
+          "code": 43,
+          "description": "Не введено описание раздела"
+        },
+        {
+          "code": 44,
+          "description": "Раздел с данным адресом уже существует"
+        }
+      ]
+    },
+    {
+      "dir": "/api/section/list",
+      "type": "get",
+      "description": "Список разделов"
+    },
+    {
+      "dir": "/api/post",
+      "type": "get",
+      "description": "Информация о посте",
+      "params": [
+        {
+          "name": "id",
+          "description": "ID поста",
+          "necessary": true
+        },
+        {
+          "name": "showChilds",
+          "description": "Показ дочерних постов",
+          "necessary": false
+        }
+      ],
+      "errors": [
+        {
+          "code": 111,
+          "description": "Пост не выбран"
+        },
+        {
+          "code": 112,
+          "description": "Пост не существует"
+        }
+      ]
+    },
+    {
+      "dir": "/api/post/create",
+      "type": "post",
+      "description": "Создание поста",
+      "params": [
+        {
+          "name": "token",
+          "description": "Ключ авторизации юзера",
+          "necessary": true
+        },
+        {
+          "name": "text",
+          "description": "Текст поста",
+          "necessary": true
+        },
+        {
+          "name": "section",
+          "description": "Раздел, в котором будет выложен пост",
+          "necessary": true
+        },
+        {
+          "name": "parent",
+          "description": "ID родительского поста",
+          "necessary": false
+        }
+      ],
+      "errors": [
+        {
+          "code": 71,
+          "description": "Текст не вставлен, Песков не одобряет"
+        },
+        {
+          "code": 72,
+          "description": "Раздел не выбран"
+        },
+        {
+          "code": 73,
+          "description": "Раздел не существует"
+        },
+        {
+          "code": 75,
+          "description": "Выбранный родительский пост не существует"
+        },
+        {
+          "code": 76,
+          "description": "Выбранный родительский пост написан в другом разделе"
+        },
+        {
+          "code": 74,
+          "description": "Не завершен таймаут постинга"
+        }
+      ]
+    },
+    {
+      "dir": "/api/pvd",
+      "type": "get",
+      "description": "Песков взрывает дома",
+      "params": [
+        {
+          "name": "page",
+          "description": "Страница списка сообщений"
+        }
+      ]
+    },
+    {
+      "dir": "/api/pvd/target",
+      "type": "get",
+      "description": "Получение цели атаки",
+      "errors": [
+        {
+          "code": 121,
+          "description": "Цели нет"
+        }
+      ]
+    },
+    {
+      "dir": "/api/pvd/target/change",
+      "type": "post",
+      "description": "Изменение цели атаки",
+      "params": [
+        {
+          "name": "token",
+          "description": "Ключ авторизации юзера",
+          "necessary": true
+        },
+        {
+          "name": "link",
+          "description": "Ссылка на цель атаки",
+          "necessary": true
+        }
+      ],
+      "errors": [
+        {
+          "code": 161,
+          "description": "Не админ"
+        },
+        {
+          "code": 162,
+          "description": "Не вставлена ссылка"
+        }
+      ]
+    },
+    {
+      "dir": "/api/pvd/chat",
+      "type": "get",
+      "description": "Получение говночата наху",
+      "params": [
+        {
+          "name": "page",
+          "description": "Страница списка сообщений",
+          "necessary": false
+        }
+      ]
+    },
+    {
+      "dir": "/api/pvd/chat/createMessage",
+      "type": "post",
+      "description": "Создание сообщения в говночате наху",
+      "params": [
+        {
+          "name": "token",
+          "description": "Ключ авторизации юзера",
+          "necessary": true
+        },
+        {
+          "name": "text",
+          "description": "Текст сообщения",
+          "necessary": true
+        }
+      ],
+      "errors": [
+        {
+          "code": 131,
+          "description": "Текст не вставлен, Песков не одобряет"
+        },
+        {
+          "code": 132,
+          "description": "Не завершен таймаут"
+        }
+      ]
+    },
+    {
+      "dir": "/api",
+      "type": "get",
+      "description": "Получение постов со всех разделов",
+      "params": [
+        {
+          "name": "page",
+          "description": "Страница списка постов",
+          "necessary": false
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 12,
+      "description": "Не залогинен"
+    }
+  ]
+}

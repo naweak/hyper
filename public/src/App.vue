@@ -13,6 +13,11 @@
               <router-link class="nav-link" :to="item.link" v-html="item.text"></router-link>
             </li>
           </ul>
+          <div class="navbar-nav my-2 my-lg-0">
+            <div class="nav-item">
+              <a href="/dev" class="nav-link">Разработчикам</a>
+            </div>
+          </div>
         </div>
       </nav>
     </header>

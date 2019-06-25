@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Разработчикам</title>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <nav id="nav" class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">thirdwave/dev</a>
+        <ul class="nav nav-pills">
+          <% meta.methods.forEach((method) => { %>
+          <li class="nav-item">
+            <a href="#<%-method.dir%>" class="nav-link"><%-method.dir%></a>
+          </li>
+          <% }) %>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <div id="content">
+        <h3 id="methodsHeader" class="mb-3 mt-3">Методы API</h3>
+        <% meta.methods.forEach((elem, index) => { %>
+        <div class="method card" id="<%- elem.dir %>">
+          <div class="card-body">
+            <a name="<%= elem.dir %>"></a>
+            <% var colourClass
+              switch (elem.type) {
+                case 'get':
+                  colourClass = 'badge-success'
+                  break
+                case 'post':
+                  colourClass = 'badge-primary'
+                  break
+                default:
+                  colourClass = 'badge-secondary'
+              } %>
+            <h4><span class="badge <%- colourClass  %>"><%- elem.type.toUpperCase() %></span> <code><%- elem.dir %></code></h4>
+            <p><%= elem.description %></p>
+            <% if (elem.params) { %>
+              <div class="params">
+                <h5>Параметры</h5>
+                <% elem.params.forEach((param, index) => { %>
+                  <div class="param">
+                    <h6><code><%- param.name %></code> <% if (param.necessary) { %>
+                        <span class="necessary" title="Обязателен">*</span>
+                      <% } %></h6>
+                    <p><%= param.description %></p>
+                  </div>
+                <% }) %>
+              </div>
+              <div class="errors">
+                <% if (elem.errors) { %>
+                  <h5>Возможные ошибки</h5>
+                  <% elem.errors.forEach((error, index) => { %>
+                    <div class="error">
+                      <h6><b>Код ошибки: <%- error.code %></b></h6>
+                      <p><%- error.description %></p>
+                    </div>
+                  <% }) %>
+                <% } %>
+              </div>
+            <% } %>
+          </div>
+        </div>
+        <% }) %>
+        <div id="typicalErrors">
+          <h3 id="errorsHeader" class="mb-4 mt-4">Типовые ошибки</h3>
+          <% meta.errors.forEach((error) => { %>
+          <div class="error card">
+            <div class="card-body">
+              <h4>Код ошибки: <%- error.code %></h4>
+              <p><%= error.description %></p>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/dev/dist/app.js"></script>
+</body>
+</html>

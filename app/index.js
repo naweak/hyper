@@ -30,6 +30,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/', apiRouter)
+app.use("/dev", static('../docs/'))
 app.use(history())
 app.use(static('../public/dist'))
 
